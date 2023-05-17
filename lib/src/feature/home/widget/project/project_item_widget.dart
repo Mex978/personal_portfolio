@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:personal_portfolio/src/core/helpers/extensions.dart';
+import 'package:personal_portfolio/src/core/model/project_model.dart';
 
-class ProjectListWidget extends StatelessWidget {
-  final List<ProjectItem> projects;
+class ProjectItemWidget extends StatelessWidget {
+  final ProjectModel project;
 
-  const ProjectListWidget({super.key, required this.projects});
-
-  @override
-  Widget build(BuildContext context) {
-    return StaggeredGrid.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      children: projects.map<Widget>(ProjectItemBuilder.new).toList(),
-    );
-  }
-}
-
-class ProjectItemBuilder extends StatelessWidget {
-  final ProjectItem project;
-
-  const ProjectItemBuilder(this.project, {super.key});
+  const ProjectItemWidget(this.project, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +27,12 @@ class ProjectItemBuilder extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat',
+            project.description,
             style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.outline),
           ),
           const SizedBox(height: 8),
           Text(
-            'React - Bootstrap - Styled Components',
+            project.technologies.join(' - '),
             style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.tertiary),
           ),
           const SizedBox(height: 8),
@@ -56,14 +40,4 @@ class ProjectItemBuilder extends StatelessWidget {
       ),
     );
   }
-}
-
-class ProjectItem {
-  final String imageUrl;
-  final String name;
-
-  ProjectItem({
-    required this.imageUrl,
-    required this.name,
-  });
 }
