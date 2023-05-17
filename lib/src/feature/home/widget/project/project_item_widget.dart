@@ -13,8 +13,12 @@ class ProjectItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+          Container(
+            clipBehavior: Clip.antiAlias,
+            height: 250,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+            ),
             child: Image.network(
               project.imageUrl,
               fit: BoxFit.cover,

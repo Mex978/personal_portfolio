@@ -10,18 +10,16 @@ class CompanyItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(right: 16),
-        height: 50,
-        child: FilledButton.tonal(
-          style: FilledButton.styleFrom(
-            elevation: 0,
-            backgroundColor: company.selected ? context.colorScheme.inversePrimary : Colors.transparent,
-          ),
-          child: Text(company.name),
-          onPressed: () => onPressed(company.id),
+    return Container(
+      padding: const EdgeInsets.only(right: 16),
+      height: 50,
+      child: FilledButton.tonal(
+        style: FilledButton.styleFrom(
+          elevation: 0,
+          backgroundColor: company.selected ? context.colorScheme.inversePrimary : Colors.transparent,
         ),
+        child: Text(company.name),
+        onPressed: () => onPressed(company.id),
       ),
     );
   }
