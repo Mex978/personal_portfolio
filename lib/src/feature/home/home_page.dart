@@ -82,8 +82,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    children = getChildren(context);
     contacts = getContacts(context);
+    children = getChildren(context);
 
     return Scaffold(
       appBar: AppBarWidget(
