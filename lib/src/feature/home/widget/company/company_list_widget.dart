@@ -25,7 +25,8 @@ class _CompanyListWidgetState extends State<CompanyListWidget> {
     super.initState();
   }
 
-  bool hasMoreToScroll = true;
+  bool hasMoreToScrollOnEnd = true;
+  bool hasMoreToScrollOnStart = false;
 
   @override
   void dispose() {
@@ -46,88 +47,125 @@ class _CompanyListWidgetState extends State<CompanyListWidget> {
       children: [
         SizedBox(
           height: 40,
-          child: LayoutBuilder(builder: (context, constraints) {
-            return Stack(
-              children: [
-                ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    if (!hasMoreToScroll) {
-                      return const LinearGradient(colors: [
-                        Colors.transparent,
-                        Colors.transparent,
-                      ]).createShader(rect);
-                    }
-
-                    return const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.transparent, Colors.white],
-                      stops: [0.6, 1.0],
-                    ).createShader(rect);
-                  },
-                  blendMode: BlendMode.dstOut,
-                  child: NotificationListener<ScrollUpdateNotification>(
-                    onNotification: (notification) {
-                      final maxScrollOffset = scrollController.position.maxScrollExtent;
-                      final currentScrollOffset = scrollController.offset;
-
-                      final hasMoreToScroll = currentScrollOffset < maxScrollOffset;
-
-                      if (this.hasMoreToScroll != hasMoreToScroll) {
-                        setState(() {
-                          this.hasMoreToScroll = hasMoreToScroll;
-                        });
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Stack(
+                children: [
+                  ShaderMask(
+                    blendMode: BlendMode.dstOut,
+                    shaderCallback: (Rect rect) {
+                      if (!hasMoreToScrollOnStart) {
+                        return const LinearGradient(
+                          colors: [Colors.transparent, Colors.transparent],
+                          stops: [1.0, 1.0],
+                        ).createShader(rect);
                       }
 
-                      //How many pixels scrolled from pervious frame
-                      // print(notification.scrollDelta);
-
-                      //List scroll position
-                      // print(notification.metrics.pixels);
-
-                      // // print('scrollController.offset: ${scrollController.offset}');
-                      // print(
-                      //     'scrollController.scrollController.position.maxScrollExtent: ${scrollController.position.maxScrollExtent}');
-
-                      return true;
+                      return const LinearGradient(
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                        colors: [Colors.transparent, Colors.white],
+                        stops: [0.8, 1.0],
+                      ).createShader(rect);
                     },
-                    child: ListView(
-                      controller: scrollController,
-                      scrollDirection: Axis.horizontal,
-                      children: widget.companies
-                          .map(
-                            (company) => CompanyItemWidget(
-                              company,
-                              onPressed: changeSelectedItem,
-                            ),
-                          )
-                          .toList(),
+                    child: ShaderMask(
+                      blendMode: BlendMode.dstOut,
+                      shaderCallback: (Rect rect) {
+                        if (!hasMoreToScrollOnEnd) {
+                          return const LinearGradient(
+                            colors: [Colors.transparent, Colors.transparent],
+                            stops: [0.0, 0.0],
+                          ).createShader(rect);
+                        }
+
+                        return const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.transparent, Colors.white],
+                          stops: [0.8, 1.0],
+                        ).createShader(rect);
+                      },
+                      child: NotificationListener<ScrollUpdateNotification>(
+                        onNotification: (notification) {
+                          final maxScrollOffset = scrollController.position.maxScrollExtent;
+                          final currentScrollOffset = scrollController.offset;
+
+                          final hasMoreToScrollOnStart = currentScrollOffset > constraints.maxWidth * .05;
+                          final hasMoreToScrollOnEnd = currentScrollOffset < maxScrollOffset;
+
+                          if (this.hasMoreToScrollOnEnd != hasMoreToScrollOnEnd) {
+                            setState(() {
+                              this.hasMoreToScrollOnEnd = hasMoreToScrollOnEnd;
+                            });
+                          }
+
+                          if (this.hasMoreToScrollOnStart != hasMoreToScrollOnStart) {
+                            setState(() {
+                              this.hasMoreToScrollOnStart = hasMoreToScrollOnStart;
+                            });
+                          }
+
+                          return true;
+                        },
+                        child: ListView(
+                          controller: scrollController,
+                          scrollDirection: Axis.horizontal,
+                          children: widget.companies
+                              .map(
+                                (company) => CompanyItemWidget(
+                                  company,
+                                  onPressed: changeSelectedItem,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                if (hasMoreToScroll)
-                  Positioned(
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    child: FloatingActionButton(
-                      shape: const CircleBorder(),
-                      child: const Icon(Icons.arrow_forward_ios),
-                      onPressed: () {
-                        scrollController.animateTo(
-                          min(
-                            scrollController.offset + (constraints.maxWidth / 2),
-                            scrollController.position.maxScrollExtent,
-                          ),
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.ease,
-                        );
-                      },
+                  if (hasMoreToScrollOnEnd)
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 0,
+                      child: FloatingActionButton(
+                        shape: const CircleBorder(),
+                        child: const Icon(Icons.arrow_forward),
+                        onPressed: () {
+                          scrollController.animateTo(
+                            min(
+                              scrollController.offset + (constraints.maxWidth / 2),
+                              scrollController.position.maxScrollExtent,
+                            ),
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.ease,
+                          );
+                        },
+                      ),
                     ),
-                  )
-              ],
-            );
-          }),
+                  if (hasMoreToScrollOnStart)
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      child: FloatingActionButton(
+                        shape: const CircleBorder(),
+                        child: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          scrollController.animateTo(
+                            max(
+                              scrollController.offset - (constraints.maxWidth / 2),
+                              0,
+                            ),
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.ease,
+                          );
+                        },
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
         ),
         const SizedBox(height: 40),
         Builder(builder: (context) {
