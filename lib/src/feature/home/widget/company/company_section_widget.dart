@@ -5,7 +5,7 @@ import 'package:personal_portfolio/src/core/model/company_model.dart';
 import 'package:personal_portfolio/src/core/widget/section_separator_widget.dart';
 
 import 'company_list_widget.dart';
-import 'skeleton_company_loader_widget.dart';
+import 'skeleton_companies_loader_widget.dart';
 
 class CompanySectionWidget extends StatelessWidget {
   const CompanySectionWidget({super.key});
@@ -16,7 +16,7 @@ class CompanySectionWidget extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('companies').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const SkeletonCompanyLoaderWidget();
+          return const SkeletonCompaniesLoaderWidget();
         }
 
         if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active) {
@@ -26,7 +26,7 @@ class CompanySectionWidget extends StatelessWidget {
             return Container();
           }
 
-          final newCompanies = data.map((e) => CompanyModel.fromDoc(e)).toList();
+          final companies = data.map((e) => CompanyModel.fromDoc(e)).toList();
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class CompanySectionWidget extends StatelessWidget {
                 style: context.textTheme.titleMedium,
               ),
               const SizedBox(height: 16),
-              CompanyListWidget(companies: newCompanies),
+              CompanyListWidget(companies: companies),
               const SectionSeparatorWidget(),
             ],
           );

@@ -3,8 +3,8 @@ import 'package:personal_portfolio/src/core/helpers/extensions.dart';
 import 'package:personal_portfolio/src/core/widget/section_separator_widget.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-class SkeletonCompanyLoaderWidget extends StatelessWidget {
-  const SkeletonCompanyLoaderWidget({super.key});
+class SkeletonCompaniesLoaderWidget extends StatelessWidget {
+  const SkeletonCompaniesLoaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
