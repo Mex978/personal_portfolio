@@ -192,7 +192,7 @@ class _CompanyListWidgetState extends State<CompanyListWidget> {
     );
   }
 
-  void changeSelectedItem(int id) {
+  void changeSelectedItem(String id) {
     for (var company in widget.companies) {
       company.selected = company.id == id;
     }

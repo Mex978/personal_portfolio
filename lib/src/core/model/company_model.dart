@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class CompanyModel {
-  final int id;
+  final String id;
   final String name;
   final String roleName;
-  final LocalModel local;
+  final String local;
   final List<String> descriptions;
   final DateTime date;
 
@@ -16,14 +18,19 @@ class CompanyModel {
     required this.date,
     required this.descriptions,
   });
-}
 
-class LocalModel {
-  final String city;
-  final String state;
+  factory CompanyModel.fromDoc(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data();
 
-  LocalModel({
-    required this.city,
-    required this.state,
-  });
+    final descriptions = data['descriptions'] as List;
+
+    return CompanyModel(
+      id: doc.id,
+      name: data['name'],
+      roleName: data['roleName'],
+      local: data['local'],
+      date: (data['date'] as Timestamp).toDate(),
+      descriptions: descriptions.map<String>((e) => e).toList(),
+    );
+  }
 }

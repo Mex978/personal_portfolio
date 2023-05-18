@@ -18,7 +18,7 @@ class CompanyDetailsWidget extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          '${company.name} / ${company.local.state} - ${company.local.city}',
+          '${company.name} / ${company.local}',
           style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.tertiary),
         ),
         ...company.descriptions.map(

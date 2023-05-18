@@ -4,7 +4,7 @@ import 'package:personal_portfolio/src/core/model/company_model.dart';
 
 class CompanyItemWidget extends StatelessWidget {
   final CompanyModel company;
-  final ValueChanged<int> onPressed;
+  final ValueChanged<String> onPressed;
 
   const CompanyItemWidget(this.company, {super.key, required this.onPressed});
 

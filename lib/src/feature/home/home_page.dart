@@ -33,16 +33,13 @@ class _HomePageState extends State<HomePage> {
   final companies = List.generate(
     10,
     (index) => CompanyModel(
-      id: index,
+      id: index.toString(),
       name: 'Company $index',
       descriptions: List.generate(
         4,
         (innerIndex) => 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. $index $innerIndex',
       ),
-      local: LocalModel(
-        city: 'Teresina',
-        state: 'PI',
-      ),
+      local: 'Teresina - PI',
       roleName: 'Frontend Engineer (Remote)',
       date: DateTime.now(),
     ),
