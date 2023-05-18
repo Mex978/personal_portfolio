@@ -49,7 +49,6 @@ class ProjectItemWidget extends StatelessWidget {
                 project.technologies.join(' - '),
                 style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.tertiary),
               ),
-              const SizedBox(height: 8),
             ],
           ),
         ),

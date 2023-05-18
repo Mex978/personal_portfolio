@@ -13,46 +13,54 @@ class SkeletonProjectsLoaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 2),
-            width: 100,
+            width: 180,
             height: 20,
             color: Colors.white,
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: List.generate(
-              3,
-              (index) => Container(
-                width: 120,
-                height: 40,
-                margin: const EdgeInsets.only(right: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              ),
+          const SizedBox(height: 40),
+          Container(
+            width: 280,
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(4),
             ),
           ),
           const SizedBox(height: 40),
           Container(
-            width: 200,
+            width: 160,
             height: 20,
             color: Colors.white,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
+          Container(
+            width: 280,
+            height: 14,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 4),
+          Container(
+            width: 270,
+            height: 14,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 4),
+          Container(
+            width: 260,
+            height: 14,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 4),
+          Container(
+            width: 275,
+            height: 14,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 8),
           Container(
             width: 160,
             height: 10,
             color: Colors.white,
-          ),
-          ...List.generate(
-            4,
-            (index) => Container(
-              margin: const EdgeInsets.only(top: 12),
-              width: 500,
-              height: 14,
-              color: Colors.white,
-            ),
           ),
           const SectionSeparatorWidget(),
         ],
