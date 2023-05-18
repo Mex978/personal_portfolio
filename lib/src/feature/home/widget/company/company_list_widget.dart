@@ -110,6 +110,7 @@ class _CompanyListWidgetState extends State<CompanyListWidget> {
                         child: ListView(
                           controller: scrollController,
                           scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
                           children: widget.companies
                               .map(
                                 (company) => CompanyItemWidget(
