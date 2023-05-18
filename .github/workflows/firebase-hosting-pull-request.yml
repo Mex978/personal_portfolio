@@ -3,6 +3,11 @@
 
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
+
+env:
+  admin_email: ${{ vars.ADMIN_EMAIL }}
+  admin_password: ${{ vars.ADMIN_PASSWORD }}
+
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
@@ -16,7 +21,7 @@ jobs:
         with:
           flutter-version: '3.10.0'
       - run: flutter pub get
-      - run: flutter build web --dart-define ADMIN_EMAIL=$ADMIN_EMAIL --dart-define ADMIN_PASSWORD=$ADMIN_PASSWORD,
+      - run: flutter build web --dart-define ADMIN_EMAIL=$admin_email --dart-define ADMIN_PASSWORD=$admin_password
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
