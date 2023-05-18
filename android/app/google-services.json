@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "863346724834",
+    "project_id": "personal-portfolio-70dcc",
+    "storage_bucket": "personal-portfolio-70dcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863346724834:android:c05d5be142fb6a6b89f3bb",
+        "android_client_info": {
+          "package_name": "com.mnl.personal_portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863346724834-qt4ohngki5s2ejn03f2ibp34pjcnfgn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHHMXBqzWBHaPa9Dba0FOc6joXH8w9GmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863346724834-qt4ohngki5s2ejn03f2ibp34pjcnfgn1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "863346724834-2j299kqg1d5qd8klli20badsc1ql5h39.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mnl.personalPortfolio.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
