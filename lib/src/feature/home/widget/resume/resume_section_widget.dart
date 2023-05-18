@@ -20,24 +20,31 @@ class ResumeSectionWidget extends StatelessWidget {
 
           Map<String, dynamic> myInfo = {};
 
-          if (data.any((element) => element.id == 'my_info')) {
-            myInfo = data.firstWhere((element) => element.id == 'my_info').data();
+          if (data.any((element) => element.id == 'resume')) {
+            myInfo['resume'] = data.firstWhere((element) => element.id == 'resume').data()['data'];
           }
 
+          if (data.any((element) => element.id == 'name')) {
+            myInfo['name'] = data.firstWhere((element) => element.id == 'name').data()['data'];
+          }
+
+          final String? name = myInfo['name'];
           final String? resume = myInfo['resume'];
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hi, I\'m',
-                style: context.textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Max Nícolas',
-                style: context.textTheme.displayLarge?.copyWith(fontFamily: 'GTWalsheimPro'),
-              ),
+              if (name?.isNotEmpty ?? false) ...[
+                Text(
+                  'Hi, I\'m',
+                  style: context.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  name!,
+                  style: context.textTheme.displayLarge?.copyWith(fontFamily: 'GTWalsheimPro'),
+                ),
+              ],
               if (resume?.isNotEmpty ?? false) ...[
                 const SizedBox(height: 24),
                 Text(

@@ -1,9 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio/main_app.dart';
 import 'package:personal_portfolio/src/core/model/action_model.dart';
-
-const profileImageUrl =
-    'https://i0.wp.com/64.media.tumblr.com/8d8dc207e53d8bc4b686866b83a628a8/e2526685b5e6d296-17/s1280x1920/d85fda3e70629e9d3e4c5efd5243bfb6789ab4a7.jpg?resize=800%2C450&ssl=1';
 
 class AppBarWidget extends StatelessWidget implements PreferredSize {
   final List<ActionModel> actions;
@@ -22,10 +20,33 @@ class AppBarWidget extends StatelessWidget implements PreferredSize {
         child: Row(
           children: [
             const SizedBox(width: 16),
-            const CircleAvatar(
-              backgroundImage: NetworkImage(profileImageUrl),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance.collection('infos').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done ||
+                    snapshot.connectionState == ConnectionState.active) {
+                  final data = snapshot.data?.docs;
+
+                  if (data == null || data.isEmpty) {
+                    return Container();
+                  }
+
+                  String? imageUrl;
+
+                  if (data.any((element) => element.id == 'imageUrl')) {
+                    imageUrl = data.firstWhere((element) => element.id == 'imageUrl').data()['data'];
+                  }
+
+                  if (imageUrl != null) {
+                    return CircleAvatar(
+                      backgroundImage: NetworkImage(imageUrl),
+                    );
+                  }
+                }
+
+                return Container();
+              },
             ),
-            // const Text('MN'),
             const Spacer(),
             ...actions.map(
               (action) => Padding(
