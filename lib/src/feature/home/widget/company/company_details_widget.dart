@@ -12,9 +12,28 @@ class CompanyDetailsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          company.roleName,
-          style: context.textTheme.titleMedium,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                company.roleName,
+                style: context.textTheme.titleMedium,
+              ),
+            ),
+            Text(
+              company.formattedStartDate,
+              style: context.textTheme.titleSmall,
+            ),
+            Text(
+              ' - ',
+              style: context.textTheme.titleSmall,
+            ),
+            Text(
+              company.formattedEndDate,
+              style: context.textTheme.titleSmall,
+            ),
+          ],
         ),
         const SizedBox(height: 12),
         Text(

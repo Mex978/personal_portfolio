@@ -8,9 +8,7 @@ import 'company_list_widget.dart';
 import 'skeleton_company_loader_widget.dart';
 
 class CompanySectionWidget extends StatelessWidget {
-  final List<CompanyModel> companies;
-
-  const CompanySectionWidget({super.key, required this.companies});
+  const CompanySectionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

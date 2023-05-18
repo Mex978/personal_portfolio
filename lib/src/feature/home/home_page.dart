@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio/src/core/helpers/extensions.dart';
 import 'package:personal_portfolio/src/core/model/action_model.dart';
-import 'package:personal_portfolio/src/core/model/company_model.dart';
 import 'package:personal_portfolio/src/core/model/contact_model.dart';
 import 'package:personal_portfolio/src/core/model/project_model.dart';
 import 'package:personal_portfolio/src/core/resource/images/images.dart';
@@ -29,21 +28,6 @@ class _HomePageState extends State<HomePage> {
   late List<ProjectModel> projects;
   List<Widget> children = [];
   List<ContactModel> contacts = [];
-
-  final companies = List.generate(
-    10,
-    (index) => CompanyModel(
-      id: index.toString(),
-      name: 'Company $index',
-      descriptions: List.generate(
-        4,
-        (innerIndex) => 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. $index $innerIndex',
-      ),
-      local: 'Teresina - PI',
-      roleName: 'Frontend Engineer (Remote)',
-      date: DateTime.now(),
-    ),
-  );
 
   @override
   void initState() {
@@ -92,9 +76,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> getChildren(BuildContext context) {
     return [
       const ResumeSectionWidget(),
-      CompanySectionWidget(
-        companies: companies,
-      ),
+      CompanySectionWidget(),
       ProjectSectionWidget(
         projects: projects,
       ),
