@@ -5,6 +5,7 @@ class ProjectModel {
   final String imageUrl;
   final String name;
   final String description;
+  final String url;
   final List<String> technologies;
 
   ProjectModel({
@@ -12,6 +13,7 @@ class ProjectModel {
     required this.imageUrl,
     required this.name,
     required this.description,
+    required this.url,
     required this.technologies,
   });
 
@@ -26,6 +28,7 @@ class ProjectModel {
       description: data['description'],
       imageUrl: data['imageUrl'],
       technologies: technologies.map<String>((e) => e).toList(),
+      url: data['url'] ?? '',
     );
   }
 }

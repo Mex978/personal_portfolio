@@ -27,6 +27,9 @@ class CompanySectionWidget extends StatelessWidget {
           }
 
           final companies = data.map((e) => CompanyModel.fromDoc(e)).toList();
+          if (companies.isNotEmpty) {
+            companies.first.selected = true;
+          }
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

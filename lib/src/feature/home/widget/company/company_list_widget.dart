@@ -20,7 +20,6 @@ class _CompanyListWidgetState extends State<CompanyListWidget> {
 
   @override
   void initState() {
-    widget.companies.first.selected = true;
     scrollController.addListener(scrollListener);
     super.initState();
   }
