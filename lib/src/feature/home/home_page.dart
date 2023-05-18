@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:personal_portfolio/src/core/helpers/extensions.dart';
 import 'package:personal_portfolio/src/core/model/action_model.dart';
 import 'package:personal_portfolio/src/core/model/contact_model.dart';
-import 'package:personal_portfolio/src/core/model/project_model.dart';
 import 'package:personal_portfolio/src/core/resource/images/images.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -25,30 +24,8 @@ class _HomePageState extends State<HomePage> {
   final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
   final ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
 
-  late List<ProjectModel> projects;
   List<Widget> children = [];
   List<ContactModel> contacts = [];
-
-  @override
-  void initState() {
-    projects = List.generate(
-      5,
-      (index) => ProjectModel(
-        imageUrl:
-            'https://s3-alpha-sig.figma.com/img/0579/79a3/eaa0af7a583db16ee5c302012b3df718?Expires=1685318400&Signature=Txe0mG-LqJCFFy7IgI4xuM3doJx5fTQkQ0PhHZPfC0Qh2xGBEPCSF4OUZVGcV6Kps0jy9f511T90OvqAjuCPmwnETKZZ9BNufVxXfSwiJ0O14R6Qdjmx-YfTjaGopWcOs~xMW~pBtnmJvxVWQIHIxV-huwGrhWOvqxg69x6CsiosR-MqYBJ75sd7F5t3CYlUV8FumoAjTiPpLKM-aGdGZ3eOzVGj0K11215SJtdXbn0l7iqFFMNN-lBK8w8c2ixwqAvQgW4vfp1Cap3Ng74CPEM2~BmlqLQaOBIvUoO7uMbewEg-n~lu4U-5tcbciIdf0ewFhhHK-ghY5hXV398X8Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
-        name: 'Project number $index',
-        description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat',
-        technologies: [
-          'React',
-          'Bootstrap',
-          'Styled Components',
-        ],
-      ),
-    );
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +53,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> getChildren(BuildContext context) {
     return [
       const ResumeSectionWidget(),
-      CompanySectionWidget(),
-      ProjectSectionWidget(
-        projects: projects,
-      ),
+      const CompanySectionWidget(),
+      const ProjectSectionWidget(),
       ContactSectionWidget(
         contacts: getContacts(context),
       ),
