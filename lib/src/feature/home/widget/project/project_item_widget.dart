@@ -25,7 +25,7 @@ class ProjectItemWidget extends StatelessWidget {
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                height: 250,
+                // height: 250,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                 ),
